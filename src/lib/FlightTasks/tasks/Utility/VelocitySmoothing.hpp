@@ -112,6 +112,33 @@ public:
 	 */
 	static void timeSynchronization(VelocitySmoothing *traj, int n_traj);
 
+	/* Compute the maximum possible velocity on the track given the remaining distance,
+	 * the maximum acceleration and the maximum jerk.
+	 * We assume a constant acceleration profile with a delay of 2*accel/jerk
+	 * (time to reach the desired acceleration from opposite max acceleration)
+	 * Equation to solve: 0 = vel^2 - 2*accel*(x - vel*2*accel/jerk)
+	 *
+	 * @param jerk maximum jerk
+	 * @param accel maximum acceleration
+	 * @param braking_distance distance to the desired stopping point
+	 */
+	static float computeMaxSpeedFromBrakingDistance(float jerk, float accel, float braking_distance);
+
+	/* Compute the maximum tangential speed in a circle defined by two line segments of length "d"
+	 * forming a V shape, opened by an angle "alpha". The circle is tangent to the end of the
+	 * two segments as shown below:
+	 *      \\
+	 *      | \ d
+	 *      /  \
+	 *  __='___a\
+	 *
+	 *  @param alpha angle between the two line segments
+	 *  @param accel maximum lateral acceleration
+	 *  @param d length of the two line segments
+	 */
+	static float computeMaxSpeedInWaypoint(float alpha, float accel, float d);
+
+
 	float getTotalTime() const { return _T1 + _T2 + _T3; }
 	float getT1() const { return _T1; }
 	float getT2() const { return _T2; }

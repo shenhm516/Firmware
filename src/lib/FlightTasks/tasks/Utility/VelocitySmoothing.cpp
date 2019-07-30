@@ -301,3 +301,20 @@ void VelocitySmoothing::timeSynchronization(VelocitySmoothing *traj, int n_traj)
 		}
 	}
 }
+
+float VelocitySmoothing::computeMaxSpeedFromBrakingDistance(float jerk, float accel, float braking_distance)
+{
+	float b = 4.f * accel * accel / jerk;
+	float c = - 2.f * accel * braking_distance;
+	float max_speed = 0.5f * (-b + sqrtf(b * b - 4.f * c));
+
+	return max_speed;
+}
+
+float VelocitySmoothing::computeMaxSpeedInWaypoint(float alpha, float accel, float d)
+{
+	float tan_alpha = tan(alpha / 2.f);
+	float max_speed_in_turn = sqrtf(accel * d * tan_alpha);
+
+	return max_speed_in_turn;
+}
