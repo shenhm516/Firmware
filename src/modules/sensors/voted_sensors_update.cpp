@@ -765,6 +765,9 @@ void VotedSensorsUpdate::magPoll(vehicle_magnetometer_s &magnetometer)
 				int32_t priority = 0;
 				orb_priority(_mag.subscription[uorb_index], &priority);
 				_mag.priority[uorb_index] = (uint8_t)priority;
+
+				/* force a scale and offset update the first time we get data */
+				parameters_update();
 			}
 
 			Vector3f vect(mag_report.x, mag_report.y, mag_report.z);
