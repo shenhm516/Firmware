@@ -1,0 +1,12 @@
+kind: pipeline
+name: default
+
+steps:
+- name: fetch
+  image: docker:git
+  commands:
+  - git fetch --tags
+- name: quick_check
+  image: px4io/px4-dev-nuttx:2019-03-08
+  commands:
+  - make quick_check
