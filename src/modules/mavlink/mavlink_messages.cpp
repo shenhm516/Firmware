@@ -52,6 +52,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <px4_time.h>
 #include <systemlib/mavlink_log.h>
+#include <lib/mathlib/math/filter/LowPassFilter2p.hpp>
 
 #include <uORB/topics/actuator_armed.h>
 #include <uORB/topics/actuator_controls.h>
@@ -4177,6 +4178,8 @@ protected:
 	bool send(const hrt_abstime t)
 	{
 		distance_sensor_s dist_sensor;
+		static bool filterhasinit=false;
+		math::LowPassFilter2p distance_sensor_filter(100.0f,50.0f);	//add a low pass filter to distance_sensor_filter，sample fre is 100hz, cutoff fre is 50hz
 
 		if (_distance_sensor_sub->update(&_dist_sensor_time, &dist_sensor)) {
 			mavlink_distance_sensor_t msg = {};
@@ -4204,10 +4207,20 @@ protected:
 				break;
 			}
 
+
+			if (!filterhasinit)
+			{
+				msg.current_distance = distance_sensor_filter.reset(dist_sensor.current_distance)* 100.0f;
+				filterhasinit = true;
+			}
+			else
+			{
+				msg.current_distance = distance_sensor_filter.apply(dist_sensor.current_distance) * 100.0f;
+			}
 			msg.orientation = dist_sensor.orientation;
 			msg.min_distance = dist_sensor.min_distance * 100.0f; /* m to cm */
 			msg.max_distance = dist_sensor.max_distance * 100.0f; /* m to cm */
-			msg.current_distance = dist_sensor.current_distance * 100.0f; /* m to cm */
+			//msg.current_distance = dist_sensor.current_distance * 100.0f; /* m to cm */
 			msg.covariance = dist_sensor.variance * 1e4f; // m^2 to cm^2
 
 			mavlink_msg_distance_sensor_send_struct(_mavlink->get_channel(), &msg);

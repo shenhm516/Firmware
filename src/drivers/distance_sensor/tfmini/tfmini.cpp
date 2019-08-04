@@ -173,7 +173,7 @@ extern "C" __EXPORT int tfmini_main(int argc, char *argv[]);
 TFMINI::TFMINI(const char *port, uint8_t rotation) :
 	CDev(RANGE_FINDER0_DEVICE_PATH),
 	_rotation(rotation),
-	_min_distance(0.30f),
+	_min_distance(0.10f),
 	_max_distance(12.0f),
 	_conversion_interval(9000),
 	_reports(nullptr),
@@ -220,7 +220,7 @@ TFMINI::init()
 
 	switch (hw_model) {
 	case 1: /* TFMINI (12m, 100 Hz)*/
-		_min_distance = 0.3f;
+		_min_distance = 0.1f;
 		_max_distance = 12.0f;
 		_conversion_interval = 9000;
 		break;
