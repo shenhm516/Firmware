@@ -1686,7 +1686,7 @@ Mavlink::configure_streams_to_default(const char *configure_single_stream)
 		configure_stream_local("DEBUG", 10.0f);
 		configure_stream_local("DEBUG_FLOAT_ARRAY", 10.0f);
 		configure_stream_local("DEBUG_VECT", 10.0f);
-		configure_stream_local("DISTANCE_SENSOR", unlimited_rate);
+		configure_stream_local("DISTANCE_SENSOR", 50.0f);
 		configure_stream_local("ESTIMATOR_STATUS", 1.0f);
 		configure_stream_local("EXTENDED_SYS_STATE", 5.0f);
 		configure_stream_local("GLOBAL_POSITION_INT", 50.0f);
@@ -1773,7 +1773,7 @@ Mavlink::configure_streams_to_default(const char *configure_single_stream)
 		configure_stream_local("DEBUG", 50.0f);
 		configure_stream_local("DEBUG_FLOAT_ARRAY", 50.0f);
 		configure_stream_local("DEBUG_VECT", 50.0f);
-		configure_stream_local("DISTANCE_SENSOR", 10.0f);
+		configure_stream_local("DISTANCE_SENSOR", unlimited_rate);
 		configure_stream_local("ESTIMATOR_STATUS", 5.0f);
 		configure_stream_local("EXTENDED_SYS_STATE", 2.0f);
 		configure_stream_local("GLOBAL_POSITION_INT", 10.0f);

@@ -33,7 +33,7 @@ px4_add_board(
 		imu/l3gd20
 		imu/lsm303d
 		imu/mpu6000
-		imu/mpu9250
+		#imu/mpu9250
 		imu/icm20948
 		irlock
 		lights/blinkm
@@ -41,7 +41,7 @@ px4_add_board(
 		lights/rgbled
 		lights/rgbled_ncp5623c
 		#lights/rgbled_pwm
-		magnetometer # all available magnetometer drivers
+		#magnetometer # all available magnetometer drivers
 		#md25
 		mkblctrl
 		lights/pca8574
@@ -64,16 +64,16 @@ px4_add_board(
 		uavcan
 
 	MODULES
-		attitude_estimator_q
+		#attitude_estimator_q
 		camera_feedback
 		commander
 		dataman
 		ekf2
 		events
-		fw_att_control
-		fw_pos_control_l1
-		gnd_att_control
-		gnd_pos_control
+		#fw_att_control
+		#fw_pos_control_l1
+		#gnd_att_control
+		#gnd_pos_control
 		land_detector
 		landing_target_estimator
 		load_mon
@@ -87,7 +87,7 @@ px4_add_board(
 		sih
 		vmount
 		vtol_att_control
-		wind_estimator
+		#wind_estimator
 
 	SYSTEMCMDS
 		bl_update
@@ -116,16 +116,16 @@ px4_add_board(
 		ver
 
 	EXAMPLES
-		bottle_drop # OBC challenge
-		fixedwing_control # Tutorial code from https://px4.io/dev/example_fixedwing_control
-		hello
-		hwtest # Hardware test
+		#bottle_drop # OBC challenge
+		#fixedwing_control # Tutorial code from https://px4.io/dev/example_fixedwing_control
+		#hello
+		#hwtest # Hardware test
 		#matlab_csv_serial
-		position_estimator_inav
-		px4_mavlink_debug # Tutorial code from http://dev.px4.io/en/debug/debug_values.html
-		px4_simple_app # Tutorial code from http://dev.px4.io/en/apps/hello_sky.html
-		rover_steering_control # Rover example app
-		segway
-		uuv_example_app
+		#position_estimator_inav
+		#px4_mavlink_debug # Tutorial code from http://dev.px4.io/en/debug/debug_values.html
+		#px4_simple_app # Tutorial code from http://dev.px4.io/en/apps/hello_sky.html
+		#rover_steering_control # Rover example app
+		#segway
+		#uuv_example_app
 
 	)
